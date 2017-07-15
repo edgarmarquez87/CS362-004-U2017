@@ -685,7 +685,7 @@ int cutpurseRefact(int currentPlayer, struct gameState *state, int handPos, int 
 	updateCoins(currentPlayer, state, 2);
       for (i = 0; i < state->numPlayers; i++)
 	{
-	  if (i = currentPlayer)  // removed not from statement != currentPlayer
+	  if (i == currentPlayer)  // removed not from statement != currentPlayer
 	    {
 	      for (j = 0; j < state->handCount[i]; j++)
 		{
@@ -1403,7 +1403,6 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
 
 int discardCard(int handPos, int currentPlayer, struct gameState *state, int trashFlag)
 {
-	
   //if card is not trashed, added to Played pile 
   if (trashFlag < 1)
     {
@@ -1411,7 +1410,6 @@ int discardCard(int handPos, int currentPlayer, struct gameState *state, int tra
       state->playedCards[state->playedCardCount] = state->hand[currentPlayer][handPos]; 
       state->playedCardCount++;
     }
-	
   //set played card to -1
   state->hand[currentPlayer][handPos] = -1;
 	
@@ -1482,7 +1480,7 @@ int updateCoins(int player, struct gameState *state, int bonus)
 	
   //reset coin count
   state->coins = 0;
-
+  
   //add coins for each Treasure card in player's hand
   for (i = 0; i < state->handCount[player]; i++)
     {
