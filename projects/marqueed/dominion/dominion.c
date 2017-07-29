@@ -685,7 +685,7 @@ int cutpurseRefact(int currentPlayer, struct gameState *state, int handPos, int 
 	updateCoins(currentPlayer, state, 2);
       for (i = 0; i < state->numPlayers; i++)
 	{
-	  if (i = currentPlayer)  // removed not from statement != currentPlayer
+	  if (i == currentPlayer)  // removed not from statement != currentPlayer
 	    {
 	      for (j = 0; j < state->handCount[i]; j++)
 		{
@@ -831,7 +831,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
   switch( card ) 
     {
     case adventurer:
-		adventurerRefact(currentPlayer, state, temphand, drawntreasure, cardDrawn, z);
+		return adventurerRefact(currentPlayer, state, temphand, drawntreasure, cardDrawn, z);
 	/*
 	  while(drawntreasure<2){
 	if (state->deckCount[currentPlayer] <1){//if the deck is empty we need to shuffle discard and add to deck
@@ -935,7 +935,8 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
       return -1;
 			
     case mine:
-		mineRefact(currentPlayer, state, handPos, choice1, choice2, i, j);
+		return mineRefact(currentPlayer, state, handPos, choice1, choice2, i, j);
+		//return 0;
 	/*
       j = state->hand[currentPlayer][choice1];  //store card we will trash
 
@@ -999,8 +1000,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
       return 0;
 		
     case smithy:
-		smithyRefact(currentPlayer, state, handPos, i);
-		return 0;
+		return smithyRefact(currentPlayer, state, handPos, i);
 		
     /*  //+3 Cards
       for (i = 0; i < 3; i++)
@@ -1087,7 +1087,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
       return 0;
 		
     case minion:
-		minionRefact(currentPlayer, state, handPos, choice1, choice2, i, j);
+		return minionRefact(currentPlayer, state, handPos, choice1, choice2, i, j);
 	/*
       //+1 action
       state->numActions++;
@@ -1403,7 +1403,6 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
 
 int discardCard(int handPos, int currentPlayer, struct gameState *state, int trashFlag)
 {
-	
   //if card is not trashed, added to Played pile 
   if (trashFlag < 1)
     {
@@ -1411,7 +1410,6 @@ int discardCard(int handPos, int currentPlayer, struct gameState *state, int tra
       state->playedCards[state->playedCardCount] = state->hand[currentPlayer][handPos]; 
       state->playedCardCount++;
     }
-	
   //set played card to -1
   state->hand[currentPlayer][handPos] = -1;
 	
@@ -1482,7 +1480,7 @@ int updateCoins(int player, struct gameState *state, int bonus)
 	
   //reset coin count
   state->coins = 0;
-
+  
   //add coins for each Treasure card in player's hand
   for (i = 0; i < state->handCount[player]; i++)
     {
