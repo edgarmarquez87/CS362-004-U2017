@@ -1,0 +1,34 @@
+Edgar Marquez
+CS362
+Summer 2017
+BugsInTeammateCode
+
+smithy.bug.1
+	Description: Test revealed that smithy allows player to draw 4 cards instead of the expected 3.
+
+	Produced every time smithy card is played.
+
+	Severity Average
+	Priority Average
+
+adventure.bug.1
+	Description: Test revealed that the limit of 2 treasure cards is reached to exit while loop but when hand is checked only 1 treasure card is held.
+
+	Produced ever time adventurer is played.
+
+	Severity Average
+	Priority Average
+
+adventurer.bug.2
+	Description: Test revealed adventurer card not discarded after being played. 
+
+	Produced every time adventurer is played.
+
+	Severity Average
+	Priority Average
+
+mine.bug.1
+	Description: Test revealed logic for limiting player to only gain a card no greater than 3 coins more expensive than the one trashed is incorrect. Allowed copper (cost 0) to be traded for gold (cost 6).
+
+	Severity Average
+	Priority Average
